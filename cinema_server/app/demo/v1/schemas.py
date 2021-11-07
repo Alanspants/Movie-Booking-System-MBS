@@ -53,7 +53,7 @@ base_path = '/v1'
 definitions = {'definitions': {}, 'parameters': {}}
 
 validators = {
-    ('cinema_available', 'GET'): {'args': {'required': [], 'properties': {'date': {'type': 'string', 'format': 'date', 'description': 'which cinema is available on this day.'}}}},
+    ('cinema_available', 'GET'): {'args': {'required': [], 'properties': {'date': {'type': 'string', 'format': 'date', 'description': 'which cinema is available on this day. yy/mm/dd'}}}},
     ('cinema_search', 'GET'): {'args': {'required': [], 'properties': {'info': {'type': 'string', 'description': 'the keyword for searching cinema'}}}},
     ('movie_search', 'GET'): {'args': {'required': [], 'properties': {'info': {'type': 'string', 'description': 'the keyword for searching movie'}}}},
 }
@@ -64,7 +64,7 @@ filters = {
     ('cinema_id', 'GET'): {200: {'headers': None, 'schema': {'type': 'object', 'properties': {'id': {'type': 'integer'}, 'name': {'type': 'string'}, 'address': {'type': 'string'}, 'phone': {'type': 'string'}}}}, 404: {'headers': None, 'schema': None}},
     ('cinema_id_snack', 'GET'): {200: {'headers': None, 'schema': {'type': 'object', 'properties': {'snacks': {'type': 'string'}}}}, 404: {'headers': None, 'schema': None}},
     ('cinema_id_movie', 'GET'): {200: {'headers': None, 'schema': {'type': 'array', 'items': {'type': 'object', 'properties': {'id': {'type': 'integer'}, 'title': {'type': 'string'}, 'description': {'type': 'string'}, 'cast': {'type': 'string'}}}}}, 404: {'headers': None, 'schema': None}},
-    ('cinema_search', 'GET'): {200: {'headers': None, 'schema': {'type': 'object', 'properties': {'id': {'type': 'integer'}, 'name': {'type': 'string'}, 'address': {'type': 'string'}, 'phone': {'type': 'string'}}}}, 403: {'headers': None, 'schema': None}, 404: {'headers': None, 'schema': None}},
+    ('cinema_search', 'GET'): {200: {'headers': None, 'schema': {'type': 'array', 'items': {'type': 'object', 'properties': {'id': {'type': 'integer'}, 'name': {'type': 'string'}, 'address': {'type': 'string'}, 'phone': {'type': 'string'}}}}}, 403: {'headers': None, 'schema': None}, 404: {'headers': None, 'schema': None}},
     ('movie', 'GET'): {200: {'headers': None, 'schema': {'type': 'array', 'items': {'type': 'object', 'properties': {'id': {'type': 'integer'}, 'title': {'type': 'string'}, 'description': {'type': 'string'}, 'cast': {'type': 'string'}}}}}},
     ('movie_id', 'GET'): {200: {'headers': None, 'schema': {'type': 'object', 'properties': {'id': {'type': 'integer'}, 'title': {'type': 'string'}, 'description': {'type': 'string'}, 'cast': {'type': 'string'}}}}, 404: {'headers': None, 'schema': None}},
     ('movie_search', 'GET'): {200: {'headers': None, 'schema': {'type': 'object', 'properties': {'id': {'type': 'integer'}, 'title': {'type': 'string'}, 'description': {'type': 'string'}, 'cast': {'type': 'string'}, 'cinema': {'type': 'array', 'items': {'type': 'object', 'properties': {'cinema_id': {'type': 'integer'}, 'cinema_name': {'type': 'string'}}}}}}}, 403: {'headers': None, 'schema': None}, 404: {'headers': None, 'schema': None}},

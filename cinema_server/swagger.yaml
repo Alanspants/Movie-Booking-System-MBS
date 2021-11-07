@@ -55,7 +55,7 @@ paths:
           name: date
           type: string
           format: date
-          description: which cinema is available on this day.
+          description: which cinema is available on this day. yy/mm/dd
       responses:
         200:
           description: "Success"
@@ -167,16 +167,18 @@ paths:
         200:
           description: "Success"
           schema:
-            type: object
-            properties:
-              id:
-                type: integer
-              name:
-                type: string
-              address:
-                type: string
-              phone:
-                type: string
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: integer
+                name:
+                  type: string
+                address:
+                  type: string
+                phone:
+                  type: string
         403:
           description: "Invalid input"
         404:
