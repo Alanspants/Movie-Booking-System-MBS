@@ -1,0 +1,268 @@
+swagger: '2.0'
+info:
+  description: "API for cinema information"
+  version: "1.0.0"
+  title: "Cinema"
+
+host: 0.0.0.0
+basePath: /v1
+
+tags:
+  - name: cinema
+    description: interface with cinema
+  - name: movie
+    description: interface with cinema
+
+schemes:
+  - http
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+  
+paths:
+  /cinema:
+    get:
+      summary: Get all cinemas' detail
+      tags:
+      - cinema
+      responses:
+        200:
+          description: "Success"
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: integer
+                name:
+                  type: string
+                address:
+                  type: string
+                phone:
+                  type: string
+        404:
+          description: "Resource not found"
+  /cinema/available:
+    get:
+      summary: Get all available cinemas at certain date
+      tags:
+      - cinema
+      parameters:
+        - in: query
+          name: date
+          type: string
+          format: date
+          description: which cinema is available on this day.
+      responses:
+        200:
+          description: "Success"
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: integer
+                name:
+                  type: string
+                address:
+                  type: string
+                phone:
+                  type: string
+        403:
+          description: "Invalid input"
+        404:
+          description: "Resource not found"
+  /cinema/{id}:
+    get:
+      summary: Get certain cinema's detail by id
+      tags:
+      - cinema
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          description: The id of target cinema
+          required: true
+      responses:
+        200:
+          description: "Success"
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+              name:
+                type: string
+              address:
+                type: string
+              phone:
+                type: string
+        404:
+          description: "Resource not found"
+  /cinema/{id}/snack:
+    get:
+      summary: Get available snack in certain cinema
+      tags:
+      - cinema
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          description: The id of target cinema
+          required: true
+      responses:
+        200:
+          description: "Success"
+          schema:
+            type: object
+            properties:
+              snacks:
+                  type: string
+        404:
+          description: "Resource not found"
+  /cinema/{id}/movie:
+    get:
+      summary: Get available movie in certain cinema
+      tags:
+      - cinema
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          description: The id of target cinema
+          required: true
+      responses:
+        200:
+          description: "Success"
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: integer
+                title:
+                  type: string
+                description:
+                  type: string
+                cast:
+                  type: string
+        404:
+          description: "Resource not found"
+  /cinema/search:
+    get:
+      summary: search cinema
+      tags:
+      - cinema
+      parameters:
+        - in: query
+          name: info
+          type: string
+          description: the keyword for searching cinema
+      responses:
+        200:
+          description: "Success"
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+              name:
+                type: string
+              address:
+                type: string
+              phone:
+                type: string
+        403:
+          description: "Invalid input"
+        404:
+          description: "Resource not found"
+  /movie:
+    get:
+      summary: Get all movie's detail
+      tags:
+      - movie
+      responses:
+        200:
+          description: "Success"
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: integer
+                title:
+                  type: string
+                description:
+                  type: string
+                cast:
+                  type: string
+  /movie/{id}:
+    get:
+      summary: Get certain movie's detail by id
+      tags:
+      - movie
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          description: The id of target movie
+          required: true
+      responses:
+        200:
+          description: "Success"
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+              title:
+                type: string
+              description:
+                type: string
+              cast:
+                type: string
+        404:
+          description: "Resource not found"
+  /movie/search:
+    get:
+      summary: search movie
+      tags:
+      - movie
+      parameters:
+        - in: query
+          name: info
+          type: string
+          description: the keyword for searching movie
+      responses:
+        200:
+          description: "Success"
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+              title:
+                type: string
+              description:
+                type: string
+              cast:
+                type: string
+              cinema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    cinema_id:
+                      type: integer
+                    cinema_name:
+                      type: string
+        403:
+          description: "Invalid input"
+        404:
+          description: "Resource not found"

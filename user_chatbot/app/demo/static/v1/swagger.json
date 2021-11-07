@@ -1,0 +1,148 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "API for user login/register and chatbot",
+    "version": "1.0.0",
+    "title": "User & ChatBot"
+  },
+  "basePath": "/v1",
+  "tags": [
+    {
+      "name": "user",
+      "description": "function with user account"
+    },
+    {
+      "name": "chatbot",
+      "description": "function with chat bot"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/user/register": {
+      "post": {
+        "summary": "register a new user",
+        "tags": [
+          "user"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "new_user",
+            "description": "username & password for new user",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                },
+                "userID": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/user/login": {
+      "post": {
+        "summary": "login as a user",
+        "tags": [
+          "user"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "user info",
+            "description": "username & password",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                },
+                "userID": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    },
+    "/chatbot/ask": {
+      "get": {
+        "summary": "Chat with chatbot",
+        "tags": [
+          "chatbot"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "expression",
+            "description": "message input",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}
