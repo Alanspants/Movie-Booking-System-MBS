@@ -1,0 +1,252 @@
+swagger: '2.0'
+info:
+  description: "API for Booking system"
+  version: "1.0.0"
+  title: "Booking Sys"
+
+host: 0.0.0.0
+basePath: /v1
+
+tags:
+  - name: timetable
+    description: interface about ticket slot
+  - name: booking
+    description: interface about booking function
+  
+
+schemes:
+  - http
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+  
+paths:
+  /all:
+    get:
+      summary: Get available ticket, timeslots and seats for each movie
+      tags:
+      - timetable
+      responses:
+        200:
+          description: "Success"
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                movie_title:
+                  type: string
+                movie_id:
+                  type: integer
+                timetable:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      timeslots_id:
+                        type: integer
+                      cinema_id:
+                        type: integer
+                      cinema_name:
+                        type: string
+                      date:
+                        type: string
+                      start_time:
+                        type: string
+                      seats:
+                        type: string
+        404:
+          description: "Resource not found"  
+  /movie/{movie_id}:
+    get:
+      summary: Get available ticket, timeslots and seats for certain movie
+      tags:
+      - timetable
+      parameters:
+        - in: path
+          name: movie_id
+          type: integer
+          description: the id of movie
+          required: true
+      responses:
+        200:
+          description: "Success"
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                movie_title:
+                  type: string
+                movie_id:
+                  type: integer
+                timetable:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      timeslots_id:
+                        type: integer
+                      cinema_id:
+                        type: integer
+                      cinema_name:
+                        type: string
+                      date:
+                        type: string
+                      start_time:
+                        type: string
+                      seats:
+                        type: string
+        404:
+          description: "Resource not found"
+  /cinema/{cinema_id}:
+    get:
+      summary: Get available ticket, timeslots and seats for certain cinema
+      tags:
+      - timetable
+      parameters:
+        - in: path
+          name: cinema_id
+          type: integer
+          description: the id of cinema
+          required: true
+      responses:
+        200:
+          description: "Success"
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                movie_title:
+                  type: string
+                movie_id:
+                  type: integer
+                timetable:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      timeslots_id:
+                        type: integer
+                      cinema_id:
+                        type: integer
+                      cinema_name:
+                        type: string
+                      date:
+                        type: string
+                      start_time:
+                        type: string
+                      seats:
+                        type: string
+        404:
+          description: "Resource not found"
+  /available:
+    get:
+      summary: check if the selected timeslot for a movie is available
+      tags:
+      - timetable
+      parameters:
+        - in: query
+          name: cinema_id
+          type: integer
+          description: the id of cinema
+        - in: query
+          name: movie_id
+          type: integer
+          description: the id of cinema
+        - in: query
+          name: date
+          type: string
+          description: date of select timeslot
+        - in: query
+          name: timeslot
+          type: string
+          description: timeslot
+      responses:
+        200:
+          description: "Success"
+          schema:
+            type: boolean
+        404:
+          description: "Resource not found"
+  /booking:
+    post:
+      summary: make a booking
+      tags:
+      - booking
+      parameters:
+        - in: query
+          name: timeslot_id
+          type: integer
+          description: the id of select timeslot
+        - in: query
+          name: seat_number
+          type: integer
+          description: the number of select seat
+        - in: query
+          name: user_id
+          type: string
+          description: ID of booking user
+      responses:
+        200:
+          description: "Success"
+          schema:
+            type: object
+            properties:
+              movie_title:
+                type: string
+              cinema_name:
+                type: string
+              booking_date:
+                type: string
+              booking_start_time:
+                type: string
+              seat_number:
+                type: integer
+        403:
+          description: "Forbidden"
+        404:
+          description: "Resource not found"
+    delete:
+      summary: cancel a booking
+      tags:
+      - booking
+      parameters:
+        - in: query
+          name: timeslot_id
+          type: integer
+          description: the id of select timeslot
+        - in: query
+          name: seat_number
+          type: integer
+          description: the number of select seat
+        - in: query
+          name: user_id
+          type: string
+          description: ID of booking user
+      responses:
+        200:
+          description: "Success"
+          schema:
+            type: object
+            properties:
+              movie_title:
+                type: string
+              cinema_name:
+                type: string
+              booking_date:
+                type: string
+              booking_start_time:
+                type: string
+              seat_number:
+                type: integer
+        403:
+          description: "Forbidden"
+        404:
+          description: "Resource not found"
+            
+                    
+                      

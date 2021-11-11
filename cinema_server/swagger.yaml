@@ -245,25 +245,18 @@ paths:
         200:
           description: "Success"
           schema:
-            type: object
-            properties:
-              id:
-                type: integer
-              title:
-                type: string
-              description:
-                type: string
-              cast:
-                type: string
-              cinema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    cinema_id:
-                      type: integer
-                    cinema_name:
-                      type: string
+            type: array
+            items:
+              type: object
+              properties:
+                cinema_id:
+                  type: integer
+                cinema_name:
+                  type: string
+                movie_id:
+                  type: integer
+                movie_title:
+                  type: string
         403:
           description: "Invalid input"
         404:
