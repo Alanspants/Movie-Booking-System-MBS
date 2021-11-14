@@ -55,7 +55,7 @@ definitions = {'definitions': {}, 'parameters': {}}
 validators = {
     ('user_register', 'POST'): {'json': {'type': 'object', 'properties': {'username': {'type': 'string'}, 'password': {'type': 'string'}}}},
     ('user_login', 'POST'): {'json': {'type': 'object', 'properties': {'username': {'type': 'string'}, 'password': {'type': 'string'}}}},
-    ('chatbot_ask', 'GET'): {'args': {'required': ['expression'], 'properties': {'expression': {'description': 'message input', 'type': 'string'}}}},
+    ('chatbot_ask', 'GET'): {'args': {'required': ['expression', 'user_id'], 'properties': {'expression': {'description': 'message input', 'type': 'string'}, 'user_id': {'description': 'current user id', 'type': 'integer'}}}},
 }
 
 filters = {

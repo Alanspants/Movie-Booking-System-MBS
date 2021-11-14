@@ -93,6 +93,11 @@ paths:
           description: message input
           required: true
           type: string
+        - in: query
+          name: user_id
+          description: current user id
+          required: true
+          type: integer
       responses:
         200:
           description: "Success"

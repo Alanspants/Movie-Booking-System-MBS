@@ -4,3 +4,4 @@ Flask-RESTful
 jsonschema
 six
 flask-cors
+rivescript
