@@ -7,6 +7,9 @@ from pathlib import Path
 
 from . import Resource
 from .fetchApi.movie.getAllMovies import get_all_movies
+from .fetchApi.movie.getMovieCinemaByName import get_movie_cinema_by_name
+from .fetchApi.movie.getMovieDetailByID import get_movie_detail_by_id
+from .fetchApi.movie.getMovieDetailByName import get_movie_detail_by_name
 from .wit import ask_wit
 
 bot = RiveScript()
@@ -25,7 +28,7 @@ class ChatbotAsk(Resource):
         answer = bot.reply("localuser", expression)
         if "ERR" in answer:
             print("Bot cannot handle")
-            # answer = ask_wit(expression)
+            answer = ask_wit(expression)
             # answer = get_all_cinemas()
             # answer = get_cinema_detail_by_id(7)
             # answer = search_cinema("bondi")
@@ -34,7 +37,10 @@ class ChatbotAsk(Resource):
             # answer = get_cinema_movie_by_name("Event Cinemas George Street")
             # answer = get_cinema_snack_by_id(0)
             # answer = get_cinema_snack_by_name("hoyts")
-            answer = get_all_movies()
+            # answer = get_all_movies()
+            # answer = get_movie_detail_by_id(0)
+            # answer = get_movie_detail_by_name("dune")
+            # answer = get_movie_cinema_by_name("dune")
             print("Wit Answer:\n" + answer)
         else:
             print("Bot Answer: " + answer)
