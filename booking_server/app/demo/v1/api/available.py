@@ -24,7 +24,7 @@ class Available(Resource):
         # result = cursor.fetchall()
         try:
             conn = sql_link.connect_sys_db()
-            query = "select * from timeslots\
+            query = "select timeslots.id as id from timeslots\
                     where movie_id = \'{movie_id}\'\
                     and cinema_id = \'{cinema_id}\'\
                     and date = \'{date}\'\
@@ -41,5 +41,10 @@ class Available(Resource):
             return make_response({"status":"Invalid input"}, 400)
 
         if len(result) != 0:
-            return True, 200
-        return False, 200
+            return {
+                "available": True,
+                "id": result[0]['id']
+                   }, 200
+        return {
+            "available": False
+               }, 200

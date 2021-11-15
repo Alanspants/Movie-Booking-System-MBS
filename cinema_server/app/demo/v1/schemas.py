@@ -67,7 +67,8 @@ filters = {
     ('cinema_search', 'GET'): {200: {'headers': None, 'schema': {'type': 'array', 'items': {'type': 'object', 'properties': {'id': {'type': 'integer'}, 'name': {'type': 'string'}, 'address': {'type': 'string'}, 'phone': {'type': 'string'}}}}}, 403: {'headers': None, 'schema': None}, 404: {'headers': None, 'schema': None}},
     ('movie', 'GET'): {200: {'headers': None, 'schema': {'type': 'array', 'items': {'type': 'object', 'properties': {'id': {'type': 'integer'}, 'title': {'type': 'string'}, 'description': {'type': 'string'}, 'cast': {'type': 'string'}}}}}},
     ('movie_id', 'GET'): {200: {'headers': None, 'schema': {'type': 'object', 'properties': {'id': {'type': 'integer'}, 'title': {'type': 'string'}, 'description': {'type': 'string'}, 'cast': {'type': 'string'}}}}, 404: {'headers': None, 'schema': None}},
-    ('movie_search', 'GET'): {200: {'headers': None, 'schema': {'type': 'array', 'items': {'type': 'object', 'properties': {'cinema_id': {'type': 'integer'}, 'cinema_name': {'type': 'string'}, 'movie_id': {'type': 'integer'}, 'movie_title': {'type': 'string'}}}}}, 403: {'headers': None, 'schema': None}, 404: {'headers': None, 'schema': None}},
+    ('movie_id_cinema', 'GET'): {200: {'headers': None, 'schema': {'type': 'array', 'items': {'type': 'object', 'properties': {'id': {'type': 'integer'}, 'name': {'type': 'string'}}}}}},
+    ('movie_search', 'GET'): {200: {'headers': None, 'schema': {'type': 'array', 'items': {'type': 'object', 'properties': {'id': {'type': 'integer'}, 'title': {'type': 'string'}}}}}, 403: {'headers': None, 'schema': None}, 404: {'headers': None, 'schema': None}},
 }
 
 scopes = {

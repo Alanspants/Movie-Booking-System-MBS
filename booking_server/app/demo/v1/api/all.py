@@ -35,22 +35,28 @@ class All(Resource):
                 output.append(copy.copy(output_movie))
         print(output)
         for result_temp in result:
-            for output_temp in output:
-                if result_temp['id'] == output_temp['movie_id']:
+            print(result_temp)
+            # for output_temp in output:
+            for index in range(len(output)):
+                # output_temp = output[index]
+                if result_temp['id'] == output[index]['movie_id']:
                     seats=""
                     for i in range(1, 16):
                         seat = "seat" + str(i) + "_user_id"
                         if result_temp[seat] == None:
                             seats = seats + str(i) + " "
                     temp = {
-                        "timeslots_id": result_temp['timeslots.id'],
+                        "timeslots_id": int(result_temp['timeslots.id']),
                         "cinema_id": result_temp['cinemas.id'],
                         "cinema_name": result_temp['name'],
                         "date": result_temp['date'].strftime("%Y-%m-%d"),
                         "start_time": str(result_temp['start_time']),
                         "seats": seats
                     }
-                    output_temp['timetable'].append(temp)
-            output_temp['timetable'].sort(key=lambda x:x['timeslots_id'])
+                    test = copy.copy(output[index]['timetable'])
+                    test.append(temp)
+                    # output[0]['timetable'].append(temp)
+                    output[index]['timetable'] = test
+            # output[index]['timetable'].sort(key=lambda x:x['timeslots_id'])
         # print(output)
         return output, 200

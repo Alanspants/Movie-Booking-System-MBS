@@ -13,9 +13,7 @@ class MovieSearch(Resource):
     def get(self):
         input = g.args['info']
         conn = sql_link.connect_sys_db()
-        query = "select distinct cinemas.id as cinema_id, cinemas.name as cinema_name, movies.id as movie_id, movies.title as movie_title from movies\
-                    join timeslots on movies.id = timeslots.movie_id\
-                    join cinemas on cinemas.id = timeslots.cinema_id\
+        query = "select id, title from movies \
                     where title like \'%{input}%\' or description like \'%{input}%\'".format(
             input = input
         )
@@ -24,7 +22,4 @@ class MovieSearch(Resource):
             cursor.execute(query)
         result = cursor.fetchall()
         cursor.close()
-        if len(result) == 0:
-            return make_response({"status": "Cinema not found"}, 404)
-        else:
-            return result, 200
+        return result, 200

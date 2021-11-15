@@ -19,6 +19,7 @@ def get_all_movies():
             temp['id'],
             temp['title']
         )
-    reply += "Type in: [movie detail: movie_id] to check the more detail about movie\nE.g.: movie detail: 1"
+    reply += "Type in: [movie detail: movie_id] to check the more detail about movie\nE.g.: movie detail: 1\n"
+    reply += "Type in: [movie timetable: movie_id] to check the more detail about movie timetable\nE.g.: movie timetable: 1"
     # print(reply)
     return reply

@@ -17,5 +17,4 @@ def get_cinema_id_by_search(input):
                 'name': temp['name']
             }
             ans.append(dict)
-    # print(reply)
     return ans

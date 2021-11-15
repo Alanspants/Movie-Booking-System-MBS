@@ -15,7 +15,7 @@ class CinemaSearch(Resource):
         query = "select * from cinemas where name like \'%{input}%\' or address like \'%{input}%\'".format(
             input = input
         )
-        print(query)
+        # print(query)
         with sql_link.mysql(conn) as cursor:
             cursor.execute(query)
         result = cursor.fetchall()

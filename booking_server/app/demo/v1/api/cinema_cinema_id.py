@@ -54,7 +54,9 @@ class CinemaCinemaId(Resource):
                         "start_time": str(result_temp['start_time']),
                         "seats": seats
                     }
-                    output_temp['timetable'].append(temp)
+                    test = copy.copy(output_temp['timetable'])
+                    test.append(temp)
+                    output_temp['timetable'] = test
             output_temp['timetable'].sort(key=lambda x:x['timeslots_id'])
         # print(output)
         return output, 200

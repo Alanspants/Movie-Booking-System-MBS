@@ -16,6 +16,7 @@ from .api.cinema_id_movie import CinemaIdMovie
 from .api.cinema_search import CinemaSearch
 from .api.movie import Movie
 from .api.movie_id import MovieId
+from .api.movie_id_cinema import MovieIdCinema
 from .api.movie_search import MovieSearch
 
 
@@ -28,5 +29,6 @@ routes = [
     dict(resource=CinemaSearch, urls=['/cinema/search'], endpoint='cinema_search'),
     dict(resource=Movie, urls=['/movie'], endpoint='movie'),
     dict(resource=MovieId, urls=['/movie/<int:id>'], endpoint='movie_id'),
+    dict(resource=MovieIdCinema, urls=['/movie/<int:id>/cinema'], endpoint='movie_id_cinema'),
     dict(resource=MovieSearch, urls=['/movie/search'], endpoint='movie_search'),
 ]

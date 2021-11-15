@@ -6,6 +6,12 @@ from rivescript import RiveScript
 from pathlib import Path
 
 from . import Resource
+from .fetchApi.booking.checkTimeslotAvailable import check_timeslot_available
+from .fetchApi.booking.getAllTimetable import get_all_timetable
+from .fetchApi.booking.getTimetableByCinemaID import get_timetable_by_cinema_id
+from .fetchApi.booking.getTimetableByCinemaName import get_timetable_by_cinema_name
+from .fetchApi.booking.getTimetableByMovieID import get_timetable_by_movie_id
+from .fetchApi.booking.getTimetableByMovieName import get_timetable_by_movie_name
 from .fetchApi.movie.getAllMovies import get_all_movies
 from .fetchApi.movie.getMovieCinemaByName import get_movie_cinema_by_name
 from .fetchApi.movie.getMovieDetailByID import get_movie_detail_by_id
@@ -28,7 +34,7 @@ class ChatbotAsk(Resource):
         answer = bot.reply("localuser", expression)
         if "ERR" in answer:
             print("Bot cannot handle")
-            answer = ask_wit(expression)
+            # answer = ask_wit(expression)
             # answer = get_all_cinemas()
             # answer = get_cinema_detail_by_id(7)
             # answer = search_cinema("bondi")
@@ -39,8 +45,14 @@ class ChatbotAsk(Resource):
             # answer = get_cinema_snack_by_name("hoyts")
             # answer = get_all_movies()
             # answer = get_movie_detail_by_id(0)
-            # answer = get_movie_detail_by_name("dune")
-            # answer = get_movie_cinema_by_name("dune")
+            # answer = get_movie_detail_by_name("the")
+            # answer = get_movie_cinema_by_name("the")
+            # answer = get_all_timetable()
+            # answer = get_timetable_by_movie_name("the")
+            # answer = get_timetable_by_movie_id(5)
+            # answer = get_timetable_by_cinema_id(0)
+            # answer = get_timetable_by_cinema_name("HOYTS Broadway")
+            answer = check_timeslot_available("Event Cinemas George Street", "dune", "202111-20", "13:00")
             print("Wit Answer:\n" + answer)
         else:
             print("Bot Answer: " + answer)

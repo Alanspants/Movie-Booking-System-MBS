@@ -349,6 +349,42 @@
         }
       }
     },
+    "/movie/{id}/cinema": {
+      "get": {
+        "summary": "Get cinemas which are showing certain movie",
+        "tags": [
+          "movie"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer",
+            "description": "The id of target movie",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/movie/search": {
       "get": {
         "summary": "search movie",
@@ -371,16 +407,10 @@
               "items": {
                 "type": "object",
                 "properties": {
-                  "cinema_id": {
+                  "id": {
                     "type": "integer"
                   },
-                  "cinema_name": {
-                    "type": "string"
-                  },
-                  "movie_id": {
-                    "type": "integer"
-                  },
-                  "movie_title": {
+                  "title": {
                     "type": "string"
                   }
                 }

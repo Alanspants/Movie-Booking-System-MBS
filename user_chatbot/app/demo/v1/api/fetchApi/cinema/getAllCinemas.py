@@ -19,6 +19,7 @@ def get_all_cinemas():
             i,
             temp['name']
         )
-    reply += "Type in: [cinema detail: cinema_id] to check the more detail about cinema\nE.g.: cinema detail: 1"
+    reply += "Type in: [cinema detail: cinema_id] to check the more detail about cinema\nE.g.: cinema detail: 1\n"
+    reply += "Type in: [cinema timetable: cinema_id] to check the more detail about cinema timetable\nE.g.: cinema timetable: 1"
     # print(reply)
     return reply

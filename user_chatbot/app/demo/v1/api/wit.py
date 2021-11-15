@@ -1,5 +1,10 @@
 import requests
 
+from .fetchApi.booking.getAllTimetable import get_all_timetable
+from .fetchApi.booking.getTimetableByCinemaID import get_timetable_by_cinema_id
+from .fetchApi.booking.getTimetableByCinemaName import get_timetable_by_cinema_name
+from .fetchApi.booking.getTimetableByMovieID import get_timetable_by_movie_id
+from .fetchApi.booking.getTimetableByMovieName import get_timetable_by_movie_name
 from .fetchApi.cinema.getAllCinemas import get_all_cinemas
 from .fetchApi.cinema.getCinemaDetailByID import get_cinema_detail_by_id
 from .fetchApi.cinema.getCinemaDetailByName import get_cinema_detail_by_name
@@ -58,6 +63,20 @@ def ask_wit(expression):
         if intent == "getMovieCinemaByName":
             search_input = jsonResult['entities']['search_input:search_input'][0]['value']
             answer = get_movie_cinema_by_name(search_input)
+        if intent == "getAllTimetable":
+            answer = get_all_timetable()
+        if intent == "getTimetableByMovieName":
+            input = jsonResult['entities']['movie_name:movie_name'][0]['value']
+            answer = get_timetable_by_movie_name(input)
+        if intent == "getTimetableByMovieID":
+            movie_id = jsonResult['entities']['movie_id:movie_id'][0]['value']
+            answer = get_timetable_by_movie_id(movie_id)
+        if intent == "getTimetableByCinemaID":
+            cinema_id = jsonResult['entities']['cinema_id:cinema_id'][0]['value']
+            answer = get_timetable_by_cinema_id(cinema_id)
+        if intent == "getTimetableByCinemaName":
+            input = jsonResult['entities']['cinema_name:cinema_name'][0]['value']
+            answer = get_timetable_by_cinema_name(input)
     except KeyError as err:
         answer = "Sorry, I don't understand your request"
     return answer

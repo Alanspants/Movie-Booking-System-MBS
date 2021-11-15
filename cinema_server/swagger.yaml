@@ -231,11 +231,34 @@ paths:
                 type: string
         404:
           description: "Resource not found"
+  /movie/{id}/cinema:
+    get:
+      summary: Get cinemas which are showing certain movie
+      tags:
+        - movie
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          description: The id of target movie
+          required: true
+      responses:
+        200:
+          description: "Success"
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: integer
+                name:
+                  type: string
   /movie/search:
     get:
       summary: search movie
       tags:
-      - movie
+        - movie
       parameters:
         - in: query
           name: info
@@ -249,13 +272,9 @@ paths:
             items:
               type: object
               properties:
-                cinema_id:
+                id:
                   type: integer
-                cinema_name:
-                  type: string
-                movie_id:
-                  type: integer
-                movie_title:
+                title:
                   type: string
         403:
           description: "Invalid input"
