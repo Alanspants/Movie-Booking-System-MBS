@@ -1,5 +1,6 @@
 import requests
 
+from .fetchApi.booking.checkTimeslotAvailable import check_timeslot_available
 from .fetchApi.booking.getAllTimetable import get_all_timetable
 from .fetchApi.booking.getTimetableByCinemaID import get_timetable_by_cinema_id
 from .fetchApi.booking.getTimetableByCinemaName import get_timetable_by_cinema_name
@@ -77,6 +78,13 @@ def ask_wit(expression):
         if intent == "getTimetableByCinemaName":
             input = jsonResult['entities']['cinema_name:cinema_name'][0]['value']
             answer = get_timetable_by_cinema_name(input)
+        if intent == "checkTimeslotAvailable":
+            ticket_num = jsonResult['entities']['ticket_num:ticket_num'][0]['value']
+            time = jsonResult['entities']['time:time'][0]['value']
+            date = jsonResult['entities']['date:date'][0]['value']
+            cinema_name = jsonResult['entities']['cinema_name:cinema_name'][0]['value']
+            movie_name = jsonResult['entities']['movie_name:movie_name'][0]['value']
+            check_timeslot_available(cinema_name, movie_name, date, time, ticket_num)
     except KeyError as err:
         answer = "Sorry, I don't understand your request"
     return answer

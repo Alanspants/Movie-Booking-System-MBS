@@ -53,7 +53,7 @@ base_path = '/v1'
 definitions = {'definitions': {}, 'parameters': {}}
 
 validators = {
-    ('available', 'GET'): {'args': {'required': [], 'properties': {'cinema_id': {'type': 'integer', 'description': 'the id of cinema'}, 'movie_id': {'type': 'integer', 'description': 'the id of cinema'}, 'date': {'type': 'string', 'description': 'date of select timeslot'}, 'timeslot': {'type': 'string', 'description': 'timeslot'}}}},
+    ('available', 'GET'): {'args': {'required': [], 'properties': {'cinema_id': {'type': 'integer', 'description': 'the id of cinema'}, 'movie_id': {'type': 'integer', 'description': 'the id of cinema'}, 'date': {'type': 'string', 'description': 'date of select timeslot'}, 'timeslot': {'type': 'string', 'description': 'timeslot'}, 'ticket_num': {'type': 'integer', 'description': 'number of tickets'}}}},
     ('booking', 'POST'): {'args': {'required': [], 'properties': {'timeslot_id': {'type': 'integer', 'description': 'the id of select timeslot'}, 'seat_number': {'type': 'integer', 'description': 'the number of select seat'}, 'user_id': {'type': 'string', 'description': 'ID of booking user'}}}},
     ('booking', 'DELETE'): {'args': {'required': [], 'properties': {'timeslot_id': {'type': 'integer', 'description': 'the id of select timeslot'}, 'seat_number': {'type': 'integer', 'description': 'the number of select seat'}, 'user_id': {'type': 'string', 'description': 'ID of booking user'}}}},
 }

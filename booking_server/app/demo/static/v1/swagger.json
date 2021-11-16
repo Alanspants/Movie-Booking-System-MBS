@@ -239,6 +239,12 @@
             "name": "timeslot",
             "type": "string",
             "description": "timeslot"
+          },
+          {
+            "in": "query",
+            "name": "ticket_num",
+            "type": "integer",
+            "description": "number of tickets"
           }
         ],
         "responses": {

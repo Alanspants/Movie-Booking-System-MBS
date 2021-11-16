@@ -2,9 +2,11 @@ import requests
 
 from ..helper.getCinemaIDBySearch import get_cinema_id_by_search
 from ..helper.getMovieIDBySearch import get_movie_id_by_search
+from ..helper.ticketRestriction1 import ticket_restriction1
+from ..helper.ticketRestriction2 import ticket_restriction2
 
 
-def check_timeslot_available(cinema_name, movie_title, date, timeslot):
+def check_timeslot_available(cinema_name, movie_title, date, timeslot, ticket_num, user_id):
 
     reply = ""
 
@@ -39,34 +41,45 @@ def check_timeslot_available(cinema_name, movie_title, date, timeslot):
     elif len(cinemas) == 0:
         return "Sorry, there is no matched cinema"
 
-    apiUrl = 'http://127.0.0.1:9091/v1/available?cinema_id={}&movie_id={}&date={}&timeslot={}'.format(
+    apiUrl = 'http://127.0.0.1:9091/v1/available?cinema_id={}&movie_id={}&date={}&timeslot={}&ticket_num={}'.format(
         cinemas[0]['id'],
         movies[0]['id'],
         date,
-        timeslot
+        timeslot,
+        ticket_num
     )
     result = requests.get(
         apiUrl
     )
+    # print(result)
     if result.status_code == 200:
         jsonResult = result.json()
         if bool(jsonResult['available']):
+            if not ticket_restriction1(jsonResult['id'], date, timeslot, user_id):
+                reply += "You cannot book two or more movies with same schedule."
+                return reply
+            if not ticket_restriction2(ticket_num, jsonResult['id'], user_id):
+                reply += "You cannot book all seats for a specific timeslot of a movie."
+                return reply
             reply += "Yes, this timeslot is available\n"
-            reply += "cinema: {}\nmovie: {}\ndate: {}\ntime: {}\ntimeslot_id: {} (Use this id to book your ticket with higher precision)".format(
+            reply += "cinema: {}\nmovie: {}\ndate: {}\nstart time: {}\ntickets number: {}\nseat: {}\ntimeslot_id: {}".format(
                 cinemas[0]['name'],
                 movies[0]['title'],
                 date,
                 timeslot,
+                ticket_num,
+                jsonResult['seat'].strip(),
                 jsonResult['id']
             )
             return reply
         else:
             reply += "Sorry, this timeslot is not available\n"
-            reply += "cinema: {}\nmovie: {}\ndate: {}\ntimeslot: {}".format(
+            reply += "cinema: {}\nmovie: {}\ndate: {}\nstart time: {}\ntickets number:{}".format(
                 cinemas[0]['id'],
                 movies[0]['id'],
                 date,
-                timeslot
+                timeslot,
+                ticket_num
             )
             return reply
     elif result.status_code == 400:

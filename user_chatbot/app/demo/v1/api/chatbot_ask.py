@@ -30,11 +30,12 @@ class ChatbotAsk(Resource):
     def get(self):
         # print(g.args)
         expression = g.args.get("expression")
+        user_id = g.args['user_id']
         print("User says: " + expression)
         answer = bot.reply("localuser", expression)
         if "ERR" in answer:
             print("Bot cannot handle")
-            # answer = ask_wit(expression)
+            answer = ask_wit(expression)
             # answer = get_all_cinemas()
             # answer = get_cinema_detail_by_id(7)
             # answer = search_cinema("bondi")
@@ -52,7 +53,7 @@ class ChatbotAsk(Resource):
             # answer = get_timetable_by_movie_id(5)
             # answer = get_timetable_by_cinema_id(0)
             # answer = get_timetable_by_cinema_name("HOYTS Broadway")
-            answer = check_timeslot_available("Event Cinemas George Street", "dune", "202111-20", "13:00")
+            # answer = check_timeslot_available("Event Cinemas George Street", "dune", "2021-11-10", "15:00", 15, user_id)
             print("Wit Answer:\n" + answer)
         else:
             print("Bot Answer: " + answer)
